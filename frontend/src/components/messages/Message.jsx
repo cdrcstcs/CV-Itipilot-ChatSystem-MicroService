@@ -4,10 +4,10 @@ import { Avartar } from "../image/avatarPage";
 import useUserData from "../../hooks/userData";
 const Message = ({ message }) => {
 	const { loading, userData } = useUserData();
+	const { selectedConversation } = useConversation();
 	if (loading){
 		return (<span className='loading loading-spinner mx-auto'></span>);
 	}
-	const { selectedConversation } = useConversation();
 	const fromMe = message.senderId === userData._id;
 	const formattedTime = extractTime(message.createdAt);
 	const chatClassName = fromMe ? "chat-end" : "chat-start";

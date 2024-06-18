@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { useAuthContext } from "../context/AuthContext";
 const useSendMessage = () => {
     const { authUser } = useAuthContext();
-    console.log(token);
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConversation();
     const sendMessage = async (message) => {
