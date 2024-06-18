@@ -7,7 +7,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server, {
 	cors: {
-		origin: "http://localhost:5500",
+		origin: true,
 		methods: ["GET", "POST"],
 	},
 });
@@ -24,7 +24,6 @@ io.httpServer.on("upgrade", (request, socket, head) => {
     });
 });
 io.on("connection", (socket) => {
-	console.log("a user connected", socket.id);
 	const userId = socket.handshake.query.userId;
 	if (userId != "undefined") userSocketMap[userId] = socket.id;
 });

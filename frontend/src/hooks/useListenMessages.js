@@ -7,7 +7,7 @@ const useListenMessages = () => {
     useEffect(() => {
         const handleNewMessage = (newMessage) => {
             newMessage.shouldShake = true;
-            setMessages(prevMessages => [...prevMessages, newMessage]); // Update messages state with new message
+            setMessages(prevMessages => [...prevMessages, newMessage]); 
         };
         if (socket) {
             socket.on("newMessage", handleNewMessage);

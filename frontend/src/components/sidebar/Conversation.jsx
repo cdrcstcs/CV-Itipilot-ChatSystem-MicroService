@@ -1,4 +1,5 @@
 import useConversation from "../../zustand/useConversation";
+import { Avartar } from "../image/avatarPage";
 const Conversation = ({ conversation, lastIdx }) => {
 	const { selectedConversation, setSelectedConversation } = useConversation();
 	const isSelected = selectedConversation?._id === conversation._id;
@@ -12,12 +13,12 @@ const Conversation = ({ conversation, lastIdx }) => {
 			>
 				<div className={`avatar `}>
 					<div className='w-12 rounded-full'>
-						<img src={conversation.profilePic} alt='user avatar' />
+						<Avartar imageId={conversation.imageId}></Avartar>
 					</div>
 				</div>
 				<div className='flex flex-col flex-1'>
 					<div className='flex gap-3 justify-between'>
-						<p className='font-bold text-gray-200'>{conversation.fullName}</p>
+						<p className='font-bold text-gray-200'>{conversation.name}</p>
 					</div>
 				</div>
 			</div>
