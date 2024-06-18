@@ -5,7 +5,7 @@ export const useAuthContext = () => {
 	return useContext(AuthContext);
 };
 export const AuthContextProvider = ({ children }) => {
-	const [authUser, setAuthUser] = useState(null);
+	let [authUser, setAuthUser] = useState(null);
 	useEffect(() => {
 		const fetchUserData = async () => {
 		  try {
@@ -19,6 +19,7 @@ export const AuthContextProvider = ({ children }) => {
 		  fetchUserData();
 		}
 	}, [authUser]); 
-	console.log(authUser);
+	console.log(authUser.data);
+	authUser = authUser.data;
 	return <AuthContext.Provider value={{ authUser }}>{children}</AuthContext.Provider>;
 };

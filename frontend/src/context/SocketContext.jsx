@@ -8,8 +8,6 @@ export const useSocketContext = () => {
 export const SocketContextProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
 	let { authUser } = useAuthContext();
-	console.log(authUser.data);
-	authUser = authUser.data;
 	useEffect(() => {
 		if (authUser) {
 			const socket = io("https://localhost:3500", {
