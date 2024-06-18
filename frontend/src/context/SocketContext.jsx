@@ -7,7 +7,7 @@ export const useSocketContext = () => {
 };
 export const SocketContextProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
-	let { authUser } = useAuthContext();
+	const { authUser } = useAuthContext();
 	useEffect(() => {
 		if (authUser) {
 			const socket = io("http://localhost:3500", {

@@ -27,9 +27,6 @@ const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
 async function verifyToken(req, res) {
     try {
         const token = req.body.token; // Extract token from request body
-        if (!token) {
-            throw new Error('Token not found in request body');
-        }
         jwt.verify(token, jwtSecret, {}, (err, userData) => {
             if (err) {
                 throw err; // Throw error if verification fails
