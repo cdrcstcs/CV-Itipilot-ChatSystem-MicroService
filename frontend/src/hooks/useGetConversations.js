@@ -7,7 +7,7 @@ const useGetConversations = () => {
 		const getConversations = async () => {
 			setLoading(true);
 			try {
-				const res = await fetch("chatapp/users");
+				const res = await fetch("/users");
 				const data = await res.json();
 				if (data.error) {
 					throw new Error(data.error);
