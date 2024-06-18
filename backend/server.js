@@ -11,7 +11,6 @@ app.use(cors({
 	credentials: true,
 	origin: true
 }));
-console.log(data);
 const Middleware = (req, res, next) => {
 	try {
 		const authHeader = req.headers.authorization;

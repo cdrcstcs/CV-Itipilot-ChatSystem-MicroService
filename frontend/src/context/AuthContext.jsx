@@ -1,5 +1,6 @@
 import { createContext, useContext} from "react";
 import { useCookies } from "./Cookies";
+import jwt from "jsonwebtoken";
 export const AuthContext = createContext();
 export const useAuthContext = () => {
 	return useContext(AuthContext);
