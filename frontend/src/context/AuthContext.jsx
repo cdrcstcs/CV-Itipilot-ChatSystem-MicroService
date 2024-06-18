@@ -1,5 +1,5 @@
-import { createContext, useContext} from "react";
-import jwt from "jsonwebtoken";
+import { createContext, useContext, useState, useEffect} from "react";
+import axios from "axios";
 export const AuthContext = createContext();
 export const useAuthContext = () => {
 	return useContext(AuthContext);
@@ -18,14 +18,27 @@ function getCookie(name) {
 }
 
 export const AuthContextProvider = ({ children }) => {
-	const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
-	let authUser = null;
-	jwt.verify(getCookie('usertoken'), jwtSecret, {}, (err, userData) => {
-		if (err) {
-			console.log(err);
-		} else {
-			authUser = userData;
-		}
-	});
-	return <AuthContext.Provider value={{ authUser }}>{children}</AuthContext.Provider>;
+    const [authUser, setAuthUser] = useState(null);
+    const token = getCookie('usertoken');
+    console.log('Token:', token); // Check token value
+
+    useEffect(() => {
+        const fetchAuthUser = async () => {
+            try {
+                const response = await axios.post(`http://localhost:3500/verify`, { token });
+                console.log('Authentication response:', response.data); // Check response from server
+                setAuthUser(response.data);
+            } catch (error) {
+                console.error('Authentication error:', error);
+                setAuthUser(null); // Handle authentication failure
+            }
+        };
+        if (token) {
+            fetchAuthUser();
+        } else {
+            setAuthUser(null); // No token available, reset authUser state
+        }
+    }, [token]);
+    console.log('AuthUser state:', authUser); // Check authUser state
+    return <AuthContext.Provider value={{ authUser }}>{children}</AuthContext.Provider>;
 };

@@ -1,21 +1,22 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
-import { useAuthContext } from "./context/AuthContext";
 import { BrowserRouter } from "react-router-dom";
+import { AuthContextProvider } from "./context/AuthContext.jsx";
+import { SocketContextProvider } from "./context/SocketContext.jsx";
 function App() {
-	const { authUser } = useAuthContext();
-	if (!authUser) {
-		return null;
-	}
 	return (
 	<BrowserRouter>
-		<div className='w-screen h-screen flex items-center justify-center'>
-			<Routes>
-				<Route path='/' element={<Home />} />
-			</Routes>
-			<Toaster />
-		</div>
+		<AuthContextProvider>
+			<SocketContextProvider>
+				<div className='w-screen h-screen flex items-center justify-center'>
+					<Routes>
+						<Route path='/' element={<Home />} />
+					</Routes>
+					<Toaster />
+				</div>	
+			</SocketContextProvider>
+		</AuthContextProvider>
 	</BrowserRouter>
 	)
 }

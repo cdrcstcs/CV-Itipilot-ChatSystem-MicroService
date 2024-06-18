@@ -10,7 +10,6 @@ async function uploadImage(req, res) {
         await image.save();
         res.json({ image });
     } catch (error) {
-        console.error('Error saving image to MongoDB:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
@@ -22,7 +21,6 @@ async function getImageById(req, res) {
         }
         res.json(image);
     } catch (error) {
-        console.error('Error fetching image from MongoDB:', error);
         res.status(500).send('Internal Server Error');
     }
 }
