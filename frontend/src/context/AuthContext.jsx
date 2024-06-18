@@ -1,23 +1,18 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import { createContext, useContext} from "react";
+import { useCookies } from "./Cookies";
 export const AuthContext = createContext();
 export const useAuthContext = () => {
 	return useContext(AuthContext);
 };
 export const AuthContextProvider = ({ children }) => {
-	const [authUser, setAuthUser] = useState(null);
-	useEffect(() => {
-		const fetchUserData = async () => {
-		  try {
-			const response = await axios.get("http://localhost:3500/userdataclient");
-			setAuthUser(response.data);
-		  } catch (error) {
-			console.error("Error fetching user data:", error);
-		  }
-		};
-		if (authUser === null) {
-		  fetchUserData();
+	const jwtSecret = 'fasefraw4r5r3wq45wdfgw34twdfg';
+	let authUser = null;
+	jwt.verify(useCookies().get('usertoken'), jwtSecret, {}, (err, userData) => {
+		if (err) {
+			console.log(err);
+		} else {
+			authUser = userData;
 		}
-	}, [authUser]); 
+	});
 	return <AuthContext.Provider value={{ authUser }}>{children}</AuthContext.Provider>;
 };

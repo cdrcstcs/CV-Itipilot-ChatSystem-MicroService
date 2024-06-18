@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useCookies } from "../context/Cookies";
+import { useAuthContext } from "../context/AuthContext";
 const useGetConversations = () => {
-    const token = useCookies().get('userIdChat');
-    console.log(token);
+    const { authUser } = useAuthContext();
     const [loading, setLoading] = useState(false);
     const [conversations, setConversations] = useState([]);
     useEffect(() => {
@@ -13,7 +12,7 @@ const useGetConversations = () => {
             try {
                 const response = await axios.get("http://localhost:3500/users/",{
                     headers:{
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${authUser._id}`,
                     }
                 });
                 setConversations(response.data);

@@ -2,9 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import useConversation from "../zustand/useConversation";
 import toast from "react-hot-toast";
-import { useCookies } from "../context/Cookies";
+import { useAuthContext } from "../context/AuthContext";
 const useSendMessage = () => {
-    const token = useCookies().get('userIdChat');
+    const { authUser } = useAuthContext();
     console.log(token);
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConversation();
@@ -15,7 +15,7 @@ const useSendMessage = () => {
                 message: message,
             },{
                 headers:{
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${authUser._id}`,
                 }
             });
             setMessages([...messages, response.data]);

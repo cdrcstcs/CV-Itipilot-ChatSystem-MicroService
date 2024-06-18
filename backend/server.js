@@ -11,24 +11,6 @@ app.use(cors({
 	credentials: true,
 	origin: true
 }));
-let data = null;
-const getUserData = async (req, res) => {
-  try {
-	data = req.body.data;
-	  res.status(200).json("ok" );
-	} catch (err) {
-	  console.log(err);
-	  res.status(500).json("Failed to get userData!");
-	}
-};
-const getUserDataForClientSide = async (req, res) => {
-  try {
-	res.status(200).json({ data });
-  } catch (err) {
-	console.error("Error awaiting data:", err);
-	res.status(500).json("Failed to get userData!");
-  }
-};
 console.log(data);
 const Middleware = (req, res, next) => {
 	try {
@@ -40,14 +22,11 @@ const Middleware = (req, res, next) => {
 	catch (err) {
 	  res.status(500).json({ error: "Failed to get userData!" });
 	}
-  };
-app.post("/userData", getUserData);
-app.get("/userdataclient", getUserDataForClientSide);
+};
 app.use(Middleware);
 app.use("/messages", messageRoutes);
 app.use("/users", userRoutes);
 app.get('/images/:id', getImageById);
-
 server.listen(PORT,'localhost',() => {
 	connectToMongoDB();
 	console.log(`Server Running on port ${PORT}`);
