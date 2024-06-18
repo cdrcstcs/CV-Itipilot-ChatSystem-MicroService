@@ -15,7 +15,7 @@ const useSendMessage = () => {
                 message: message,
             },{
                 headers:{
-                    Authorization: `Bearer ${authUser._id}`,
+                    Authorization: `Bearer ${authUser.userId}`,
                 }
             });
             setMessages([...messages, response.data]);

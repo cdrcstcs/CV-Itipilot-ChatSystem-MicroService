@@ -1,14 +1,17 @@
-import { useAuthContext } from "../../context/AuthContext";
 import { extractTime } from "../../utils/extractTime";
 import useConversation from "../../zustand/useConversation";
 import { Avartar } from "../image/avatarPage";
+import useUserData from "../../hooks/userData";
 const Message = ({ message }) => {
-	const { authUser } = useAuthContext();
+	const { loading, userData } = useUserData();
+	if (loading){
+		return (<span className='loading loading-spinner mx-auto'></span>);
+	}
 	const { selectedConversation } = useConversation();
-	const fromMe = message.senderId === authUser._id;
+	const fromMe = message.senderId === userData._id;
 	const formattedTime = extractTime(message.createdAt);
 	const chatClassName = fromMe ? "chat-end" : "chat-start";
-	const profilePic = fromMe ? authUser.imageId : selectedConversation?.imageId;
+	const profilePic = fromMe ? userData.imageId : selectedConversation?.imageId;
 	const bubbleBgColor = fromMe ? "bg-blue-500" : "";
 	const shakeClass = message.shouldShake ? "shake" : "";
 	return (

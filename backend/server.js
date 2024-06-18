@@ -39,10 +39,10 @@ async function verifyToken(req, res) {
     }
 }
 app.post('/verify', verifyToken);
+app.get('/images/:id', getImageById);
 app.use(Middleware);
 app.use("/messages", messageRoutes);
 app.use("/users", userRoutes);
-app.get('/images/:id', getImageById);
 server.listen(PORT,'localhost',() => {
 	connectToMongoDB();
 	console.log(`Server Running on port ${PORT}`);
