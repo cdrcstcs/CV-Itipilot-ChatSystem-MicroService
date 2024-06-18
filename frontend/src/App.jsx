@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext";
 import { SocketContextProvider } from "./context/SocketContext";
 import { BrowserRouter } from "react-router-dom";
-import CookiesProvider from "./context/CookieContext";
+import CookiesProvider from "./context/Cookies";
 function App() {
 	const { authUser } = useAuthContext();
 	if (!authUser) {

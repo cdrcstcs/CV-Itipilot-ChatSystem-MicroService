@@ -5,10 +5,10 @@ import { Avartar } from "../image/avatarPage";
 const Message = ({ message }) => {
 	const { authUser } = useAuthContext();
 	const { selectedConversation } = useConversation();
-	const fromMe = message.senderId === authUser._id;
+	const fromMe = message.senderId === authUser.data._id;
 	const formattedTime = extractTime(message.createdAt);
 	const chatClassName = fromMe ? "chat-end" : "chat-start";
-	const profilePic = fromMe ? authUser.imageId : selectedConversation?.imageId;
+	const profilePic = fromMe ? authUser.data.imageId : selectedConversation?.imageId;
 	const bubbleBgColor = fromMe ? "bg-blue-500" : "";
 	const shakeClass = message.shouldShake ? "shake" : "";
 	return (

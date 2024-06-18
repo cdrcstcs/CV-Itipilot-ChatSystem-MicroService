@@ -32,7 +32,9 @@ const getUserDataForClientSide = async (req, res) => {
 console.log(data);
 const Middleware = (req, res, next) => {
 	try {
-		req.user = data.cookies.userIdChat;
+		const authHeader = req.headers.authorization;
+		const token = authHeader && authHeader.split(" ")[1];		
+		req.user = token;
 		next();
 	}
 	catch (err) {

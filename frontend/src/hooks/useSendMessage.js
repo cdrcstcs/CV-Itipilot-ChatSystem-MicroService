@@ -2,9 +2,10 @@ import { useState } from "react";
 import axios from "axios";
 import useConversation from "../zustand/useConversation";
 import toast from "react-hot-toast";
-import { useCookies } from "../context/CookieContext";
+import { useCookies } from "../context/Cookies";
 const useSendMessage = () => {
     const token = useCookies().get('userIdChat');
+    console.log(token);
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConversation();
     const sendMessage = async (message) => {

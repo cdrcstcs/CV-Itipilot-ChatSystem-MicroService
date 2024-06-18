@@ -10,8 +10,9 @@ app.use(cors({
 const server = http.createServer(app);
 const io = new Server(server, {
 	cors: {
-		origin: true,
-		methods: ["GET", "POST"],
+		origin: "*", // Allow all origins for demo purposes; restrict this in production
+        methods: ["GET", "POST"],
+        credentials: true
 	},
 });
 export const getReceiverSocketId = (receiverId) => {
