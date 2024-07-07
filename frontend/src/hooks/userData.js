@@ -27,7 +27,7 @@ const useUserData = () => {
         };
         getUserData();
     }, []);
-    console.log(userData);
+    // console.log(userData);
     return { loading, userData };
 };
 export default useUserData;

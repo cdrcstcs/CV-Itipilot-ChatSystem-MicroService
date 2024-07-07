@@ -8,7 +8,6 @@ const useListenMessages = () => {
 
     useEffect(() => {
         const handleNewMessage = (newMessage) => {
-            console.log(newMessage);
             newMessage.shouldShake = true; // Example modification to newMessage
             setMessages(prevMessages => [...prevMessages, newMessage]);
         };

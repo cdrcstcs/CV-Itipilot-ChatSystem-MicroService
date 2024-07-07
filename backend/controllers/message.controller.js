@@ -5,6 +5,7 @@ import { getReceiverSocketId, io } from "../socket/socket.js";
 export const sendMessage = async (req, res) => {
 	try {
 		const { message } = req.body;
+		console.log(message);
 		const { id: receiverId } = req.params;
 		const senderId = (await User.findOne())._id.toString();
 		let conversation = await Conversation.findOne({

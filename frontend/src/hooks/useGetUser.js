@@ -27,7 +27,7 @@ const useUser = () => {
         };
         getUser();
     }, []);
-    console.log(User);
+    // console.log(User);
     return { loading, User };
 };
 export default useUser;

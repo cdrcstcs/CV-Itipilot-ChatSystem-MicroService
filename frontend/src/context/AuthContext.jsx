@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
             try {
                 const token = getCookie('usertoken');
                 const response = await axios.post(`http://localhost:3500/verify`, { token });
-                console.log('Authentication response:', response.data);
+                // console.log('Authentication response:', response.data);
                 setAuthUser(response.data);
             } catch (error) {
                 console.error('Authentication error:', error);
@@ -31,6 +31,6 @@ export const AuthContextProvider = ({ children }) => {
             fetchAuthUser();
         }
     }, []);
-    console.log('AuthUser state:', authUser);
+    // console.log('AuthUser state:', authUser);
     return <AuthContext.Provider value={{ authUser }}>{children}</AuthContext.Provider>;
 };

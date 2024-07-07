@@ -7,11 +7,12 @@ const useGetMessages = () => {
     // const { authUser } = useAuthContext();
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConversation();
+    console.log(selectedConversation);
     useEffect(() => {
         const getMessages = async () => {
             setLoading(true);
             try {
-                console.log(selectedConversation._id);
+                // console.log(selectedConversation._id);
                 const response = await axios.get(`http://localhost:3500/messages/${selectedConversation._id}`,
                     // {
                     // headers:{
@@ -19,6 +20,7 @@ const useGetMessages = () => {
                     // }
                 // }
                 );
+                console.log(response.data);
                 setMessages(response.data);
             } catch (error) {
                 toast.error(error.message);
@@ -29,7 +31,7 @@ const useGetMessages = () => {
         if (selectedConversation?._id) {
             getMessages();
         }
-    }, [selectedConversation?._id, setMessages]);
+    }, [selectedConversation]);
     return { messages, loading };
 };
 export default useGetMessages;

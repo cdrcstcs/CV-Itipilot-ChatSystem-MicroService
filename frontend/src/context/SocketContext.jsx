@@ -9,9 +9,12 @@ export const useSocketContext = () => {
 };
 
 export const SocketContextProvider = ({ children }) => {
+	let count = 0;
     const { loading, users } = useUsers(); // Fetch all users (adjust as per your hook implementation)
     const [sockets, setSockets] = useState({}); // Store socket connections for each user
-	console.log(users);
+	// console.log(users);
+	count = count + 1;
+	// console.log(count);
     useEffect(() => {
         // Create socket connections for each user
         if (!loading && users.length > 0) {

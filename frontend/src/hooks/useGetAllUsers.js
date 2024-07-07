@@ -27,7 +27,7 @@ const useUsers = () => {
         };
         getusers();
     }, []);
-    console.log(users);
+    // console.log(users);
     return { loading, users };
 };
 export default useUsers;

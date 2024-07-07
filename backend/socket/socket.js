@@ -20,13 +20,17 @@ export const getReceiverSocketId = (receiverId) => {
 	return userSocketMap[receiverId];
 };
 const userSocketMap = {}; 
-let count= 0;
+// let count= 0;
 io.on("connection", (socket) => {
 	const userId = socket.handshake.query.userId;
-	count= count+1;
+	// count= count+1;
 	console.log(userId);
-	console.log(count);
-	if (userId != "undefined") userSocketMap[userId] = socket.id;
+	// console.log(count);
+	if (userId != "undefined" && !userSocketMap[userId]) userSocketMap[userId] = socket.id;
+	socket.on("disconnect", () => {
+        console.log("User disconnected with ID:", userId);
+        delete userSocketMap[userId];
+    });
 });
 export { app, io, server };
 

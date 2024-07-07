@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsSend } from "react-icons/bs";
 import useSendMessage from "../../hooks/useSendMessage";
-import useSendMessageAuto from "../../hooks/useSendMessageAuto";
+// import useSendMessageAuto from "../../hooks/useSendMessageAuto";
 const MessageInput = () => {
 	const messagesData = [
 		"Hey, have you heard about the stunning beaches in Bali? It's truly a paradise!",
@@ -103,12 +103,13 @@ const MessageInput = () => {
 	};	
 	const [message, setMessage] = useState("");
 	const { loading, sendMessage } = useSendMessage();
-	const { loading:l, sendMessageAuto} = useSendMessageAuto();
+	// const { loading:l, sendMessageAuto} = useSendMessageAuto();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!message) return;
-		await sendMessage(message);
-		await sendMessageAuto(messagesData[getRandomInt(0,messagesData.length-1)]);
+		await sendMessage(message,messagesData[getRandomInt(0,messagesData.length-1)]);
+		// await new Promise(resolve => setTimeout(resolve, 20000));
+		// await sendMessageAuto(messagesData[getRandomInt(0,messagesData.length-1)]);
 		setMessage("");
 	};
 	return (
@@ -122,7 +123,7 @@ const MessageInput = () => {
 					onChange={(e) => setMessage(e.target.value)}
 				/>
 				<button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3'>
-					{(loading||l) ? <div className='loading loading-spinner'></div> : <BsSend />}
+					{(loading) ? <div className='loading loading-spinner'></div> : <BsSend />}
 				</button>
 			</div>
 		</form>

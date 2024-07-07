@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 export const Avartar = ({imageId}) => {
-  console.log(imageId);
+  // console.log(imageId);
   const [image, setImage] = useState(null);
   const fetchImage = async () => {
       try {
