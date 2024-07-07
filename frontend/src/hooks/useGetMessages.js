@@ -2,20 +2,23 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import useConversation from "../zustand/useConversation";
 import toast from "react-hot-toast";
-import { useAuthContext } from "../context/AuthContext";
+// import { useAuthContext } from "../context/AuthContext";
 const useGetMessages = () => {
-    const { authUser } = useAuthContext();
+    // const { authUser } = useAuthContext();
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConversation();
     useEffect(() => {
         const getMessages = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:3500/messages/${selectedConversation._id}`,{
-                    headers:{
-                        Authorization: `Bearer ${authUser.userId}`,
-                    }
-                });
+                console.log(selectedConversation._id);
+                const response = await axios.get(`http://localhost:3500/messages/${selectedConversation._id}`,
+                    // {
+                    // headers:{
+                    //     Authorization: `Bearer ${authUser.userId}`,
+                    // }
+                // }
+                );
                 setMessages(response.data);
             } catch (error) {
                 toast.error(error.message);

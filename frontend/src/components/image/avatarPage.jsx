@@ -18,7 +18,7 @@ useEffect(() => {
     <div>
       {image ? (
         <div>
-          <img src={`http://localhost:4000/${image}`} alt={image} style={{width:'30px', height:'30px', borderRadius:'50%'}}/>
+          <img src={`http://localhost:3500/${image}`} alt={image} style={{width:'30px', height:'30px', borderRadius:'50%'}}/>
         </div>
       ) : (
         <p>Loading...</p>

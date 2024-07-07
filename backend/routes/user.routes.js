@@ -1,6 +1,7 @@
 import express from "express";
-import { getUsersForSidebar, getUser } from "../controllers/user.controller.js";
+import { getUsersForSidebar, getUser, getAllUser } from "../controllers/user.controller.js";
 const router = express.Router();
 router.get("/", getUsersForSidebar);
-router.get("/:id",getUser);
+router.get("/cur",getUser);
+router.get("/all",getAllUser);
 export default router;

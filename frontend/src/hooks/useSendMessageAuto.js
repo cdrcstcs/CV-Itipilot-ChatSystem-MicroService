@@ -2,15 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 import useConversation from "../zustand/useConversation";
 import toast from "react-hot-toast";
-import { useAuthContext } from "../context/AuthContext";
-const useSendMessage = () => {
+// import { useAuthContext } from "../context/AuthContext";
+const useSendMessageAuto = () => {
     // const { authUser } = useAuthContext();
     const [loading, setLoading] = useState(false);
     const { messages, setMessages, selectedConversation } = useConversation();
-    const sendMessage = async (message) => {
+    const sendMessageAuto = async (message) => {
         setLoading(true);
         try {
-            const response = await axios.post(`http://localhost:3500/messages/send/${selectedConversation._id}`, {
+            const response = await axios.post(`http://localhost:3500/messages/sendauto/${selectedConversation._id}`, {
                 message: message,
             }
             // ,{
@@ -26,6 +26,6 @@ const useSendMessage = () => {
             setLoading(false);
         }
     };
-    return { sendMessage, loading };
+    return { sendMessageAuto, loading };
 };
-export default useSendMessage;
+export default useSendMessageAuto;

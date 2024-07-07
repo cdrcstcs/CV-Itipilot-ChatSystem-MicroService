@@ -16,11 +16,16 @@ const io = new Server(server, {
 	},
 });
 export const getReceiverSocketId = (receiverId) => {
+	// console.log(userSocketMap);
 	return userSocketMap[receiverId];
 };
 const userSocketMap = {}; 
+let count= 0;
 io.on("connection", (socket) => {
 	const userId = socket.handshake.query.userId;
+	count= count+1;
+	console.log(userId);
+	console.log(count);
 	if (userId != "undefined") userSocketMap[userId] = socket.id;
 });
 export { app, io, server };

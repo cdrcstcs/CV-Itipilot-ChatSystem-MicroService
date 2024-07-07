@@ -2,32 +2,32 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 // import { useAuthContext } from "../context/AuthContext";
-const useUserData = () => {
-    // const { authUser } = useAuthContext();
+const useUsers = () => {
+    // const { authUsers } = useAuthContext();
     const [loading, setLoading] = useState(false);
-    const [userData, setUserData] = useState([]);
-    // console.log(authUser);
+    const [users, setusers] = useState([]);
+    // console.log(authusers);
     useEffect(() => {
-        const getUserData = async () => {
+        const getusers = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:3500/users`,
+                const response = await axios.get(`http://localhost:3500/users/all`,
                 // {
                 //     headers:{
-                //         Authorization: `Bearer ${authUser.userId}`,
+                //         Authorization: `Bearer ${authusers.usersId}`,
                 //     }
                 // }
                 );
-                setUserData(response.data);
+                setusers(response.data);
             } catch (error) {
                 toast.error(error.message);
             } finally {
                 setLoading(false);
             }
         };
-        getUserData();
+        getusers();
     }, []);
-    console.log(userData);
-    return { loading, userData };
+    console.log(users);
+    return { loading, users };
 };
-export default useUserData;
+export default useUsers;

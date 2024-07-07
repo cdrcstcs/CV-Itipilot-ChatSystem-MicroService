@@ -3,12 +3,12 @@ import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter } from "react-router-dom";
 import { SocketContextProvider } from "./context/SocketContext.jsx";
-import { useAuthContext } from "./context/AuthContext.jsx";
+// import { useAuthContext } from "./context/AuthContext.jsx";
 function App() {
-	const { authUser } = useAuthContext();
-	if(!authUser){
-		return null
-	}
+	// const { authUser } = useAuthContext();
+	// if(!authUser){
+	// 	return null
+	// }
 	return (
 	<BrowserRouter>
 		<SocketContextProvider>

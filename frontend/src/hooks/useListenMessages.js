@@ -1,19 +1,32 @@
 import { useEffect } from "react";
 import { useSocketContext } from "../context/SocketContext";
 import useConversation from "../zustand/useConversation";
+
 const useListenMessages = () => {
-    const { socket } = useSocketContext();
-    const { messages, setMessages } = useConversation();
+    const { sockets } = useSocketContext(); // Access all sockets from context
+    const { setMessages } = useConversation(); // Assuming useConversation provides setMessages function
+
     useEffect(() => {
         const handleNewMessage = (newMessage) => {
-            newMessage.shouldShake = true;
-            setMessages(prevMessages => [...prevMessages, newMessage]); 
+            console.log(newMessage);
+            newMessage.shouldShake = true; // Example modification to newMessage
+            setMessages(prevMessages => [...prevMessages, newMessage]);
         };
-        if (socket) {
+
+        // Listen to "newMessage" event for each socket
+        Object.values(sockets).forEach(socket => {
             socket.on("newMessage", handleNewMessage);
-            return () => socket.off("newMessage", handleNewMessage);
-        }
-    }, [socket, setMessages]);
-    return null;
+        });
+
+        // Clean up socket listeners when component unmounts
+        return () => {
+            Object.values(sockets).forEach(socket => {
+                socket.off("newMessage", handleNewMessage);
+            });
+        };
+    }, [sockets, setMessages]);
+
+    return null; // Return value as needed, can be null or other components/elements
 };
+
 export default useListenMessages;
